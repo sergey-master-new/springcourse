@@ -20,8 +20,8 @@
     <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/views/"/>        <!-- указываем где лажат наши views - представления-->
         <property name="suffix" value=".html"/>                  <!-- указываем расширение файлов .html -->
-    </bean>                                      <!-- указание prefix и suffix позволит обращаться к контроллеру только по названию -->
-                                                 <!-- указание prefix и suffix позволит не указывать полный путь и расширение -->
+    </bean>                                      <!-- указание prefix и suffix позволит обращаться из контроллера -->
+                                                 <!-- к views только по названию и не указывать полный путь и расширение -->
 
     <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
         <property name="templateResolver" ref="templateResolver"/>

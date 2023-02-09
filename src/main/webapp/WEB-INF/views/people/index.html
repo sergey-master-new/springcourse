@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>All people</title>
+</head>
+<body>
+                                                    <!--<div>  является универсальным контейнером для потокового контента-->
+<div th:each="person : ${people}">                                                    <!--th:each — отображение коллекции-->
+    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>  <!--"user" роли не играет -->
+</div>
+
+</body>
+</html>

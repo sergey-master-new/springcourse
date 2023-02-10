@@ -28,4 +28,11 @@ public class PersonDao {
         return people.stream().filter(person -> person.getId() == id).findFirst().orElse(null);
     }
 
+    public void save(Person person){
+
+        person.setId(++countId);
+        people.add(person);
+
+    }
+
 }

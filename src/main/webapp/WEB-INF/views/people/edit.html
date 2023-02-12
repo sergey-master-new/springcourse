@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update person</title>
+</head>
+<body>
+                                                                                                      <!-- в object будет передан объект person -->
+<form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+                              <!-- action - на этот url данные с формы будут отправлены!!! (была ошибка @{/people/{id}(id=${person.getId()})/edit})-->
+                              <!-- метод PATCH, только с th (thymeleaf.org) -->
+                              <!-- thymeleaf в форме с методом POST сам создаст скрытое поле и поместит в него значение PATCH -->
+                              <!-- spring с помощью фильтров прочитает значение поля с name="_method" value="PATCH"-->
+    <label for="name">Enter name: </label>                <!-- for="name" значит лебл (ярлык, этикетка) для id="name"-->
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <input type="submit" value="Update!"/>
+
+</form>
+
+</body>
+</html>

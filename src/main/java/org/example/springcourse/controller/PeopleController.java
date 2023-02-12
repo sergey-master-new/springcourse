@@ -34,17 +34,26 @@ public class PeopleController {
     }
 
 //    @GetMapping("/new")
-//    public String newPerson(Model model){
+//    public String newPerson(Model model){                            // ниже пример с @ModelAttribute
 //
 //        model.addAttribute("person", new Person());
 //        return "people/new";
 //    }
 
-    @GetMapping("/new")
-    public String newPerson(@ModelAttribute("person") Person person){
-
-        return "people/new";
+    @GetMapping("/new")                                                 // Пример с @ModelAttribute
+    public String newPerson(@ModelAttribute("person") Person person){   // 1. Создание объекта new Person()
+                                                                        // 2. В поля ничего не передаем, будут значения по умолчанию
+        return "people/new";                                            // 3. Объект person добавляем в модель как атрибут
     }
+
+//    @PostMapping()
+//    public String create(@RequestParam String name){            //ниже пример с @ModelAttribute, лучший вариант
+//
+//        Person person = new Person();
+//        person.setName(name);
+//        personDao.save(person);
+//        return "redirect:/people";
+//    }
 
     @PostMapping()
     public String create(@ModelAttribute("person") Person person){
@@ -53,4 +62,24 @@ public class PeopleController {
         return "redirect:/people";
     }
 
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id){
+
+        model.addAttribute(personDao.show(id));
+        return "/people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("person") Person person, @PathVariable("id") int id){
+
+        personDao.update(id, person);
+        return "redirect:/people";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable("id") int id){
+
+        personDao.delete(id);
+        return "redirect:/people";
+    }
 }

@@ -1,7 +1,11 @@
 package org.example.springcourse.config;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 //    Иерархия:
 //    WebApplicationInitializer
@@ -27,4 +31,16 @@ public class MySpringMvcDispatcherServletInitializer extends AbstractAnnotationC
     protected String[] getServletMappings() {
         return new String[] {"/"};              // "/" - любой наш запрос должен перенаправляться на наш DispatcherServlet
     }                                           //равноценен из web.xml тегу: <url-pattern>/</url-pattern> из эл-та <servlet-mapping>
+
+    @Override
+    public void onStartup(ServletContext aServletContext) throws ServletException {      // запускается при старте приложения
+        super.onStartup(aServletContext);
+        registerHiddenFieldFilter(aServletContext);                                      // добавляем фильтр - объект HiddenHttpMethodFilter
+    }
+
+    private void registerHiddenFieldFilter(ServletContext aContext) {
+        aContext.addFilter("hiddenHttpMethodFilter",
+                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*"); // добавляем чтение Http-методов
+                                                                                                            // в скрытых полях
+    }                                                                           // "/*" - фильтр будет работать для всех адресов в приложении
 }

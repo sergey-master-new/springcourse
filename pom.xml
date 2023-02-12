@@ -86,6 +86,25 @@
         <!--    библиотеки, дублирующих библиотеки "вот того, соседнего приложения", то очень скоро встанет вопрос об исчерпании-->
         <!--    памяти, а, следовательно, медленной и неустойчивой работы.-->
 
+        <!-- в репозитории Maven выбираем Hibernate Validator Engine -->
+        <!-- чтобы не зависеть от Hibernate можем использовать javax.validation (Bean Validation API) -->
+        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+<!--            <version>8.0.0.Final</version> с последней версией не работает -->
+            <version>6.1.6.Final</version>
+        </dependency>
+
+<!--        не помогла зависимость, валидация с ней не работала &lt;!&ndash; https://mvnrepository.com/artifact/javax.validation/validation-api &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>javax.validation</groupId>-->
+<!--            <artifactId>validation-api</artifactId>-->
+<!--            <version>2.0.1.Final</version>-->
+<!--        </dependency>-->
+
+
+
     </dependencies>
 
     <build>

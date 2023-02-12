@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,8 +8,22 @@
 
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
 
-    <label for="name">Enter name: </label>                    <!--    for="name" значит лебл (ярлык, этикетка) для id="name"-->
+    <label for="name">Enter name: </label>                            <!--    for="name" значит лебл (ярлык, этикетка) для id="name"-->
     <input type="text" th:field="*{name}" id="name"/>
+                                                                      <!--   ниже используется тег div, но можно <p/> или другой тег-->
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+                                                  <!-- ${#fields} - доступ к полям объекта person -->
+                                                  <!-- th:errors="*{name}, если будут ошибки по полю name, то thymeleaf их покажет -->
+                                                  <!-- Name error мы никогда не увидим, так как thymeleaf будет подставлять значения-->
+                                                  <!-- "color: red" - css код для текста внутри тега div-->
+    <br/>
+    <label for="age">Enter age: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+    <br/>
+    <label for="email">Enter email: </label>
+    <input type="text" th:field="*{email}" id="email"/>
+    <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
     <br/>
     <input type="submit" value="Create!"/>
 

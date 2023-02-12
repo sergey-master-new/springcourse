@@ -6,7 +6,8 @@
 </head>
 <body>
 
-<p th:text="${person.getName()}">VALUE</p>
+<p th:text="${person.getName() + ', ' + person.getAge()}">VALUE</p>
+<p th:text="${'Email: ' + person.getEmail()}">VALUE</p>
 <p th:text="${person.getId()}">VALUE</p>
                                                          <!--с помощью тега <a.../> только GET-запрос-->
 
